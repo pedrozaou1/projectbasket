@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+     <!--TITULO DA PÁGINA-->
+
+    <title>
+
+        Controle Jogos basquete
+        <br><br>
+
+
+    </title>
+
+    <!--TRATAMENTO FEITO COM CSS PARA OCULTAR OPÇÃO DE INSTRUÇÕES PÁGINA-->
+
+    <style type="text/css">
+        .hidden {
+             display:none;
+        }
+   
+        input {  display:block;
+       
+        }
+   
+             
+        }
+   
+       </style>
+
+<!--CORPO DA PÁGINA, COM ENTRADAS E INFORMAÇÕES-->
+
+<body>
+
+    <h3> CONTROLE MÉDIA JOGOS BASQUETE  </h3>
+
+    <p> JOGADORA MARIA  </p>
+
+    <input type="button" value=" Instruções uso " onclick="mostra('jogo1')" />
+    <div id= "jogo1" class="hidden">
+
+    <h2> Instruções de uso </h2>
+    
+    Modo de uso:
+    <br><br>
+    Adicionar placar realizado em jogo, no campo " placar "
+    Clicar adicionar jogo 
+    <br><br>
+    Para pesquisar jogo anterior,
+    no campo " Resultados ", digitar a partida anterior 
+    <br><br>
+
+    <p> ________________________________________________________ </p>
+
+</div>
+    
+
+<!--ENTRADAS E SAIDAS DA PÁGINA + BOTÕES-->
+
+    <p id="idJogo">Jogo 5:</p>
+
+    <label for="idPlacar">Placar:</label>
+    <input type="number" id="idPlacar" required>
+    <br><br>
+
+    <label for="idSaida">Jogo a ser exibido:</label>
+    <input type="number" id="idSaida" required>
+    <br><br>
+
+
+    <button onclick="adicionar()">Adicionar jogo</button>
+
+    <button onclick="exibirResultado()">Exibir Resultado</button>
+
+    <br><br>
+
+    <output id="idOutput"></output>
+
+</body>
+
+<!--PROCESSAMENTO DA PÁGINA E FUNÇÕES-->
+
+<script>
+
+    function mostra (id) {
+    
+    if (document.getElementById(id).style.display == 'block'){
+    document.getElementById(id).style.display = 'none'; 
+    }else { document.getElementById(id).style.display = 'block';}
+    
+    }
+    
+        let jogoLista = [1, 2, 3, 4]
+        let placarLista = [12, 24, 10, 24]
+        let minimodaTemporadaLista = [12, 24, 24, 24]
+        let maximodaTemporadaLista = [12, 24, 24, 24]
+        let quebrarecordeMinLista = [0, 0, 1, 1]
+        let quebrarecordMaxLista = [0, 1, 1, 1]
+        let output = document.querySelector("#idOutput")
+    
+        let contadorJogos = 5
+    
+        let menorPonto = 12
+        let maiorPonto = 24
+    
+        let qtdQuebrarecordeMin = 1
+        let qtdQuebrarecordMax = 1
+    
+        function adicionar() {
+            let inputPlacar = document.querySelector("#idPlacar")
+            let textoJogo = document.querySelector("#idJogo")
+    
+            jogoLista.push(contadorJogos)
+            placarLista.push(Number(inputPlacar.value))
+    
+            if (Number(inputPlacar.value) < menorPonto) {
+                menorPonto = Number(inputPlacar.value)
+                qtdQuebrarecordeMin++
+            }
+    
+            quebrarecordeMinLista.push(qtdQuebrarecordeMin)
+            minimodaTemporadaLista.push(menorPonto)
+    
+            if (Number(inputPlacar.value) > maiorPonto) {
+                maiorPonto = Number(inputPlacar.value)
+                qtdQuebrarecordMax++
+            }
+    
+            quebrarecordMaxLista.push(qtdQuebrarecordMax)
+            maximodaTemporadaLista.push(maiorPonto)
+    
+            contadorJogos++
+    
+            textoJogo.innerHTML = `Jogo ${contadorJogos}:`
+            inputPlacar.value = ""
+    
+        }
+    
+        function exibirResultado() {
+    
+            let saida = Number(document.querySelector("#idSaida").value);
+    
+            output.innerHTML = ""
+    
+            if (jogoLista.indexOf(saida) > -1) {
+                output.innerHTML += `Jogo: ${jogoLista[saida - 1]} <br> Placar: ${placarLista[saida - 1]}<br> Mínimo da Temporada: ${minimodaTemporadaLista[saida - 1]}<br>  Máximo da Temporada: ${maximodaTemporadaLista[saida - 1]}<br>   Quebra de Recorde Mínima:${quebrarecordeMinLista[saida - 1]}<br> Quebra de recorde Máxima: ${quebrarecordMaxLista[saida - 1]} <br>`
+            } else {
+                output.innerHTML = "Número de jogo inválido"
+            }
+    
+            document.querySelector("#idSaida").value = ""
+    
+        }
+    
+       
+    
+    
+    
+    </script>
+
+</html>
