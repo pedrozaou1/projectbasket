@@ -1,4 +1,7 @@
 # projectbasket
+
+O PRIMEIRO ARQUIVO NO "projectbasket" é o WINRAR chamado "PROWAY DESAFIO - PEDRO DOS SANTOS" que contêm os arquivos do desafio. Baixe ele e extraia-os!!!
+
 I will use this repository to post and share my code for the Proway exercise and challenge.
 
 (Vou usar este repositório para postar e compartilhar meu código para o exercício e desafio Proway.)
